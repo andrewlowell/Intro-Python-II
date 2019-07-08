@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -49,3 +50,45 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+player = Player("JoeBob", room["outside"])
+
+print("Welcome to Adventure Quest!")
+
+gameOver = False
+
+while not gameOver:
+
+  print (f"Current room: {player.currentRoom.name}")
+  print (f"Current room: {player.currentRoom.description}")
+  move = input("Please indicate which direction you'd like to move, either n, e, s, or w, q to quit: ")
+
+  if move == "q":
+    gameOver = True
+
+  elif move == "n":
+    if not hasattr(player.currentRoom, "n_to"):
+      print("No room to the North")
+    else:
+      player.currentRoom = player.currentRoom.n_to
+
+  elif move == "e":
+    if not hasattr(player.currentRoom, "e_to"):
+      print("No room to the East")
+    else:
+      player.currentRoom = player.currentRoom.e_to
+
+  elif move == "s":
+    if not hasattr(player.currentRoom, "s_to"):
+      print("No room to the South")
+    else:
+      player.currentRoom = player.currentRoom.s_to
+
+  elif move == "w":
+    if not hasattr(player.currentRoom, "w_to"):
+      print("No room to the West")
+    else:
+      player.currentRoom = player.currentRoom.w_to
+
+  else:
+    print("Malformed input")
