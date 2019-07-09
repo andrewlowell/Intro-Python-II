@@ -10,4 +10,3 @@ class Room:
     self.e_to = e_to
     self.s_to = s_to
     self.w_to = w_to
-    print(f"self.items in a room: {self.items}")
