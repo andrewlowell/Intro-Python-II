@@ -1,11 +1,15 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
+torch = Item("Torch", "This torch lights your way.")
+dagger = Item("Dagger", "Sharp, pointy knife, useful for protection.")
+
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", [Item("Torch", "This torch lights your way."), Item("Dagger", "Sharp, pointy knife, useful for protection.")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -59,33 +63,55 @@ gameOver = False
 
 while not gameOver:
 
+  print("\n")
   print (f"Current room: {player.currentRoom.name}")
   print (f"Current room: {player.currentRoom.description}")
-  move = input("Please indicate which direction you'd like to move, either n, e, s, or w, q to quit: ")
+
+
+  # *** Print out the items in the room
+
+  itemStr = "The room contains the following items: "
+
+  if len(player.currentRoom.items) > 0:
+    for item in player.currentRoom.items:
+      # *** On the last item in the array, output special formatting
+      if item == player.currentRoom.items[-1]:
+        itemStr = itemStr + item.name
+      else:
+        itemStr = itemStr + item.name + ", "
+
+    print(itemStr)
+
+
+  # *** Get and make the player's move
+
+  inputStr = input("Please indicate which direction you'd like to move, either n, e, s, or w, q to quit: ")
+  split = inputStr.split()
+  if len(split) == 2
 
   if move == "q":
     gameOver = True
 
   elif move == "n":
-    if not hasattr(player.currentRoom, "n_to"):
+    if player.currentRoom.n_to == None:
       print("No room to the North")
     else:
       player.currentRoom = player.currentRoom.n_to
 
   elif move == "e":
-    if not hasattr(player.currentRoom, "e_to"):
+    if player.currentRoom.e_to == None:
       print("No room to the East")
     else:
       player.currentRoom = player.currentRoom.e_to
 
   elif move == "s":
-    if not hasattr(player.currentRoom, "s_to"):
+    if player.currentRoom.s_to == None:
       print("No room to the South")
     else:
       player.currentRoom = player.currentRoom.s_to
 
   elif move == "w":
-    if not hasattr(player.currentRoom, "w_to"):
+    if player.currentRoom.w_to == None:
       print("No room to the West")
     else:
       player.currentRoom = player.currentRoom.w_to
