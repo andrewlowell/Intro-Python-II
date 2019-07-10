@@ -103,19 +103,13 @@ while not gameOver:
 
     # *** Get or take an item
     if split[0] == "take" or split[0] == "get":
-      for index, item in enumerate(player.currentRoom.items):
-        if item.name == split[1]:
-          player.items.append(player.currentRoom.items[index])
-          player.currentRoom.items.pop(index)
+      player.get_item(split[1])
 
     # *** Drop an item
     elif split[0] == "drop":
-      for index, item in enumerate(player.items):
-        if item.name == split[1]:
-          player.currentRoom.items.append(player.items[index])
-          player.items.pop(index)
+      player.drop_item(split[1])
 
-  # *** If the length of the split array is one, probably just tryna move somewhere
+  # *** If the length of the split array is one, probably just tryna move somewhere or quit or look at the inventory
   elif len(split) == 1:
     move = split[0]
 

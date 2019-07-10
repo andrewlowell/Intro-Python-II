@@ -10,3 +10,15 @@ class Room:
     self.e_to = e_to
     self.s_to = s_to
     self.w_to = w_to
+
+  def get_item(self, item):
+    self.items.append(item)
+
+  # *** Returns the item dropped if it existed, None if it didn't
+  def drop_item(self, inputName):
+    item = None
+    for n, i in enumerate(self.items):
+      if i.name == inputName:
+        item = i
+        self.items.pop(n)
+    return item
