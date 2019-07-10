@@ -110,8 +110,10 @@ while not gameOver:
 
     # *** Drop an item
     elif split[0] == "drop":
-      # do other stuff
-      print("")
+      for index, item in enumerate(player.items):
+        if item.name == split[1]:
+          player.currentRoom.items.append(player.items[index])
+          player.items.pop(index)
 
   # *** If the length of the split array is one, probably just tryna move somewhere
   elif len(split) == 1:
@@ -123,7 +125,7 @@ while not gameOver:
     elif move == "i" or move == "inventory":
       print("Your inventory:")
       for item in player.items:
-        print(item.name)
+        print(item.name + "\n" + item.description)
 
     elif move == "n":
       if player.currentRoom.n_to == None:
